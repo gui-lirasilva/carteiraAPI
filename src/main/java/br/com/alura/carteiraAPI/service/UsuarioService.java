@@ -8,20 +8,25 @@ import java.util.stream.Collectors;
 import javax.validation.Valid;
 
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.alura.carteiraAPI.dto.UsuarioDto;
 import br.com.alura.carteiraAPI.dto.UsuarioFormDto;
 import br.com.alura.carteiraAPI.modelo.Usuario;
+import br.com.alura.carteiraAPI.repository.UsuarioRepository;
 
-@Service // Define para o Spring que essa classe contém um serviço/regras de negócio
-public class UsuarioService { // A classe service contém as regras de negócio
+@Service
+public class UsuarioService {
 	
-	private List<Usuario> usuarios = new ArrayList<>();
+	@Autowired
+	private UsuarioRepository usuarioRepository;
+	
 	private ModelMapper modelMapper = new ModelMapper();
 	
 	public List<UsuarioDto> listar() {
-		return usuarios.stream().map(t -> modelMapper.map(t, UsuarioDto.class)).collect(Collectors.toList()); 
+		List<Usuario> usuarios = usuarioRepository.findAll();
+		return usuarios.stream().map(u -> modelMapper.map(u, UsuarioDto.class)).collect(Collectors.toList()); 
 	}
 
 	public void cadastrar(@Valid UsuarioFormDto dto) {
@@ -30,7 +35,7 @@ public class UsuarioService { // A classe service contém as regras de negócio
 		String senha = new Random().nextInt(999999)+"";
 		usuario.setSenha(senha);
 		
-		usuarios.add(usuario);
+		usuarioRepository.save(usuario);
 	}
 	
 }

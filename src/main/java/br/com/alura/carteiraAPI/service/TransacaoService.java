@@ -1,13 +1,13 @@
 package br.com.alura.carteiraAPI.service;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
 import javax.validation.Valid;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import br.com.alura.carteiraAPI.dto.TransacaoDto;
@@ -23,13 +23,15 @@ public class TransacaoService {
 	
 	private ModelMapper modelMapper = new ModelMapper();
 	
-	public List<TransacaoDto> listar() {
-		List<Transacao> transacoes = transacaoRepository.findAll();
-		return transacoes.stream().map(t -> modelMapper.map(t, TransacaoDto.class)).collect(Collectors.toList());
+	public Page<TransacaoDto> listar(Pageable paginacao) {
+		Page<Transacao> transacoes = transacaoRepository.findAll(paginacao);
+		return transacoes.map(t -> modelMapper.map(t, TransacaoDto.class));
 	}
-
+	
+	@Transactional
 	public void cadastrar(@RequestBody @Valid TransacaoFormDto dto) {
 		Transacao transacao = modelMapper.map(dto, Transacao.class);
+		transacao.setId(null);
 		transacaoRepository.save(transacao);
 	}
 }

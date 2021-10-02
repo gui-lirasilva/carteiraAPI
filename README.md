@@ -19,8 +19,11 @@ O projeto será atualizado e incrementado ao decorrer dos módulos do bootcamp, 
 - ``Spring Boot DevTools ``
 - ``Spring Web``
 - ``Spring Validation (Bean validation)``
+- ``JPA``
 - ``ModelMapper 2.4.2``
 - ``Lombok 1.18.20``
+- ``Flyway core 7.7.3``
+- ``MySQL 5.7``
 - ``Postman 9.0.2``
 - ``DTO (Data transfer object)``
 - ``REST``

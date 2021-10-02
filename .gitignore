@@ -29,7 +29,6 @@ build/
 HELP.md
 mvnw
 mvnw.cmd
-src/main/resources/
 src/main/resources/application.properties
 
 ### Eclipse ###

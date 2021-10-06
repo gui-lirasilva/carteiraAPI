@@ -1,5 +1,5 @@
 # Resumo do projeto
-Projeto realizado nas com as aulas co módulo 2 do bootcamp de Java (Alura bootcamps).
+Projeto realizado nas aulas do bootcamp de Java (Alura bootcamps).
 O projeto contém uma API REST de carteira de investimento feita anteriormente com as tecnologias Java EE, e agora sendo refeita com o framework Spring Boot e outras ferramentas para facilitar o desenvolvimento.
 O projeto será atualizado e incrementado ao decorrer dos módulos do bootcamp, ganhando mais funcionalidades, segurança e boas práticas de código.
 

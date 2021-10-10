@@ -28,13 +28,14 @@ public class UsuarioService {
 		return usuarios.map(u -> modelMapper.map(u, UsuarioDto.class)); 
 	}
 
-	public void cadastrar(@Valid UsuarioFormDto dto) {
+	public UsuarioDto cadastrar(@Valid UsuarioFormDto dto) {
 		Usuario usuario = modelMapper.map(dto, Usuario.class);
-		
+		usuario.setId(null);
 		String senha = new Random().nextInt(999999)+"";
 		usuario.setSenha(senha);
 		
 		usuarioRepository.save(usuario);
+		return modelMapper.map(usuario, UsuarioDto.class);
 	}
 	
 }

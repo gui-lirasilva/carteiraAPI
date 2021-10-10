@@ -9,4 +9,5 @@ public class UsuarioDto {
 	
 	private String nome;
 	private String login;
+	private Long id;
 }

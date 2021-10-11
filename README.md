@@ -29,4 +29,5 @@ O projeto será atualizado e incrementado ao decorrer dos módulos do bootcamp, 
 - ``REST``
 
 ## 📁 Acesso ao projeto
-Você pode acessar os arquivos do projeto clicando [aqui](https://github.com/gui-lirasilva/livrariaAPI/tree/master/src/main/java/br/com/alura/livrariaAPI).
+Você pode acessar os arquivos do projeto clicando [aqui](https://github.com/gui-lirasilva/carteiraAPI/tree/master/src/main).
+

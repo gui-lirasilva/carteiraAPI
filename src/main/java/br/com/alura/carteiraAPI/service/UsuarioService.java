@@ -23,7 +23,7 @@ public class UsuarioService {
 	
 	private ModelMapper modelMapper = new ModelMapper();
 	
-	public Page<UsuarioDto> listar(Pageable paginacao) {
+	public Page<UsuarioDto> listar(Pageable paginacao) {		
 		Page<Usuario> usuarios = usuarioRepository.findAll(paginacao);
 		return usuarios.map(u -> modelMapper.map(u, UsuarioDto.class)); 
 	}

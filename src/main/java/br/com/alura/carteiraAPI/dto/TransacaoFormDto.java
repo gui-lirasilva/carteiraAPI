@@ -24,7 +24,7 @@ public class TransacaoFormDto {
 	
 	@NotBlank
 	@Size(min = 5, max = 6)
-	@Pattern(regexp = "[a-zA-Z]{4}[0-9][0-9]?") //Regex para 4 letras e dois números, sendo o segundo opcional
+	@Pattern(regexp = "[a-zA-Z]{4}[0-9][0-9]?", message = "{transacao.ticker.invalido}")
 	private String ticker;
 	
 	@NotNull

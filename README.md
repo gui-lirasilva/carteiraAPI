@@ -27,6 +27,7 @@ O projeto será atualizado e incrementado ao decorrer dos módulos do bootcamp, 
 - ``Postman 9.0.2``
 - ``DTO (Data transfer object)``
 - ``REST``
+- ``JUnit``
 
 ## 📁 Acesso ao projeto
 Você pode acessar os arquivos do projeto clicando [aqui](https://github.com/gui-lirasilva/carteiraAPI/tree/master/src/main).

@@ -1,5 +1,6 @@
 package br.com.alura.carteiraAPI.service;
 
+import javax.persistence.EntityNotFoundException;
 import javax.validation.Valid;
 
 import org.modelmapper.ModelMapper;
@@ -35,12 +36,21 @@ public class TransacaoService {
 	@Transactional
 	public TransacaoDto cadastrar(@RequestBody @Valid TransacaoFormDto dto) {
 		Long idUsuario = dto.getUsuarioId();
-		Usuario usuario = usuarioRepository.getById(idUsuario);
 		
-		Transacao transacao = modelMapper.map(dto, Transacao.class);
-		transacao.setId(null);
-		transacao.setUsuario(usuario);
-		transacaoRepository.save(transacao);
-		return modelMapper.map(transacao, TransacaoDto.class);
+		try {
+			Usuario usuario = usuarioRepository.getById(idUsuario);
+			Transacao transacao = modelMapper.map(dto, Transacao.class);
+			transacao.setId(null);
+			transacao.setUsuario(usuario);
+			
+			transacaoRepository.save(transacao);
+			return modelMapper.map(transacao, TransacaoDto.class);
+			
+		} catch (EntityNotFoundException e) {
+			throw new IllegalArgumentException("Usuario inexistente");
+		}
+		
+		
+		
 	}
 }

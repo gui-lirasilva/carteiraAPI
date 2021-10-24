@@ -60,7 +60,7 @@ class TransacaoRepositoryTest {
 		Transacao t3 = new Transacao(
 				"XPTO6",
 				new BigDecimal("99.00"),
-				10,
+				100,
 				LocalDate.now(),
 				TipoTransacao.VENDA,
 				usuario);
@@ -69,7 +69,7 @@ class TransacaoRepositoryTest {
 		Transacao t4 = new Transacao(
 				"XPTO6",
 				new BigDecimal("99.00"),
-				10,
+				100,
 				LocalDate.now(),
 				TipoTransacao.VENDA,
 				usuario);
@@ -90,11 +90,11 @@ class TransacaoRepositoryTest {
 		.assertThat(relatorio)
 		.hasSize(4)
 		.extracting(ItemCarteiraDto::getTicker, ItemCarteiraDto::getQuantidade, ItemCarteiraDto::getPercentual)
-		.containsExactlyInAnyOrder(
+		.containsExactlyInAnyOrder( 
 				Assertions.tuple("XPTO4", 10l, 0.043478),
 				Assertions.tuple("XPTO5", 10l, 0.043478),
 				Assertions.tuple("XPTO6", 200l, 0.869565),
-				Assertions.tuple("XPTO8", 10l, 0.043478));
+				Assertions.tuple("XPTO8", 10l, 0.043478)); // Continua com erro
 	}
 
 }

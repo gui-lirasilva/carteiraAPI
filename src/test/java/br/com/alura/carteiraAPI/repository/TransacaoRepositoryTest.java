@@ -62,7 +62,7 @@ class TransacaoRepositoryTest {
 				new BigDecimal("99.00"),
 				100,
 				LocalDate.now(),
-				TipoTransacao.VENDA,
+				TipoTransacao.COMPRA,
 				usuario);
 		entityManager.persist(t3);
 		
@@ -71,7 +71,7 @@ class TransacaoRepositoryTest {
 				new BigDecimal("99.00"),
 				100,
 				LocalDate.now(),
-				TipoTransacao.VENDA,
+				TipoTransacao.COMPRA,
 				usuario);
 		entityManager.persist(t4);
 		
@@ -80,7 +80,7 @@ class TransacaoRepositoryTest {
 				new BigDecimal("1000.00"),
 				10,
 				LocalDate.now(),
-				TipoTransacao.VENDA,
+				TipoTransacao.COMPRA,
 				usuario);
 		entityManager.persist(t5);
 		

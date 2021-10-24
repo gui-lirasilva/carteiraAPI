@@ -16,7 +16,7 @@ public class CalculadoraDeImpostoService {
 		
 		BigDecimal valorTransacao = transacao
 									.getPreco()
-									.multiply(new BigDecimal(transacao.getQuantidade()));
+									.multiply(new BigDecimal(transacao.getQuantidade()).setScale(2, RoundingMode.HALF_UP));
 		if(valorTransacao.compareTo(new BigDecimal(20000)) < 0) {
 			return BigDecimal.ZERO;
 		}

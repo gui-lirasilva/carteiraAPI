@@ -59,7 +59,7 @@ class TransacaoRepositoryTest {
 		
 		Transacao t3 = new Transacao(
 				"XPTO6",
-				new BigDecimal("99.00"),
+				new BigDecimal("100.00"),
 				100,
 				LocalDate.now(),
 				TipoTransacao.COMPRA,
@@ -68,7 +68,7 @@ class TransacaoRepositoryTest {
 		
 		Transacao t4 = new Transacao(
 				"XPTO6",
-				new BigDecimal("99.00"),
+				new BigDecimal("100.00"),
 				100,
 				LocalDate.now(),
 				TipoTransacao.COMPRA,
@@ -91,10 +91,74 @@ class TransacaoRepositoryTest {
 		.hasSize(4)
 		.extracting(ItemCarteiraDto::getTicker, ItemCarteiraDto::getQuantidade, ItemCarteiraDto::getPercentual)
 		.containsExactlyInAnyOrder( 
-				Assertions.tuple("XPTO4", 10l, 0.043478),
-				Assertions.tuple("XPTO5", 10l, 0.043478),
-				Assertions.tuple("XPTO6", 200l, 0.869565),
-				Assertions.tuple("XPTO8", 10l, 0.043478));
+				Assertions.tuple("XPTO4", 10l, new BigDecimal("4.35")),
+				Assertions.tuple("XPTO5", 10l, new BigDecimal("4.35")),
+				Assertions.tuple("XPTO6", 200l, new BigDecimal("86.96")),
+				Assertions.tuple("XPTO8", 10l, new BigDecimal("4.35")));
+	}
+	
+	@Test
+	void deveriaRetornarRelatorioDeCarteiraDeInvestimentosConsiderandoVendas() {
+		
+		Usuario usuario = new Usuario("Guilherme", "guilherme@gmail.com", "589311");
+		entityManager.persist(usuario);
+		
+		Transacao t1 = new Transacao(
+				"XPTO4",
+				new BigDecimal("55.50"),
+				10,
+				LocalDate.now(),
+				TipoTransacao.COMPRA,
+				usuario);
+		entityManager.persist(t1);
+		
+		Transacao t2 = new Transacao(
+				"XPTO5",
+				new BigDecimal("55.50"),
+				10,
+				LocalDate.now(),
+				TipoTransacao.COMPRA,
+				usuario);
+		entityManager.persist(t2);
+		
+		Transacao t3 = new Transacao(
+				"XPTO6",
+				new BigDecimal("100.00"),
+				200,
+				LocalDate.now(),
+				TipoTransacao.COMPRA,
+				usuario);
+		entityManager.persist(t3);
+		
+		Transacao t4 = new Transacao(
+				"XPTO6",
+				new BigDecimal("100.00"),
+				100,
+				LocalDate.now(),
+				TipoTransacao.VENDA,
+				usuario);
+		entityManager.persist(t4);
+		
+		Transacao t5 = new Transacao(
+				"XPTO8",
+				new BigDecimal("1000.00"),
+				10,
+				LocalDate.now(),
+				TipoTransacao.COMPRA,
+				usuario);
+		entityManager.persist(t5);
+		
+		List<ItemCarteiraDto> relatorio = repository.relatorioCarteiraDeInvestimentos();
+		
+		Assertions
+		.assertThat(relatorio)
+		.hasSize(4)
+		.extracting(ItemCarteiraDto::getTicker, ItemCarteiraDto::getQuantidade, ItemCarteiraDto::getPercentual)
+		.containsExactlyInAnyOrder( 
+				Assertions.tuple("XPTO4", 10l, new BigDecimal("0.07")),
+				Assertions.tuple("XPTO5", 10l,new BigDecimal("0.07")),
+				Assertions.tuple("XPTO6", 100l, new BigDecimal("0.76")),
+				Assertions.tuple("XPTO8", 10l, new BigDecimal("0.07")));
 	}
 
 }

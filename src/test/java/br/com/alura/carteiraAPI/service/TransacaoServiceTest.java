@@ -33,8 +33,7 @@ class TransacaoServiceTest {
 	@InjectMocks
 	private TransacaoService service;
 	
-	@Test
-	void deveriaCadastrarUmaTransacao() {
+	private TransacaoFormDto criarTransacaoFormDto() {
 		TransacaoFormDto formDto = new TransacaoFormDto(
 				"ITAUSA",
 				new BigDecimal("50.00"),
@@ -42,8 +41,16 @@ class TransacaoServiceTest {
 				120,
 				TipoTransacao.COMPRA,
 				1523l);
+		return formDto;
+	}
+	
+	@Test
+	void deveriaCadastrarUmaTransacao() {
+		TransacaoFormDto formDto = criarTransacaoFormDto();
 		
 		TransacaoDto dto = service.cadastrar(formDto);
+		
+		Mockito.verify(transacaoRepository).save(Mockito.any());
 		
 		assertEquals(formDto.getTicker(), dto.getTicker());
 		assertEquals(formDto.getPreco(), dto.getPreco());
@@ -53,13 +60,7 @@ class TransacaoServiceTest {
 	
 	@Test
 	void naoDeveriaCadastrarUmaTransacaoComUsuarioInexistente() {
-		TransacaoFormDto formDto = new TransacaoFormDto(
-				"ITAUSA",
-				new BigDecimal("50.00"),
-				LocalDate.now(),
-				120,
-				TipoTransacao.COMPRA,
-				1523l);
+		TransacaoFormDto formDto = criarTransacaoFormDto();
 		
 		Mockito
 		.when(usuarioRepository.getById(formDto.getUsuarioId()))

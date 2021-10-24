@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import br.com.alura.carteiraAPI.modelo.TipoTransacao;
@@ -13,35 +14,39 @@ import br.com.alura.carteiraAPI.modelo.Usuario;
 
 class CalculadoraDeImpostoServiceTest {
 
-	@Test
-	void transacaoDoTipoCompraNaoDeveriaTerImposto() {
+	private CalculadoraDeImpostoService calculadora;
+
+	private Transacao criarTransacao(BigDecimal preco, Integer quantidade, TipoTransacao tipo) {
 		Transacao transacao = new Transacao(
 				120l,
 				"BBSE3",
-				new BigDecimal("30.00"),
-				10,
+				preco,
+				quantidade,
 				LocalDate.now(),
-				TipoTransacao.COMPRA,
+				tipo,
 				new Usuario(1l, "Rafaela", "rafa@gmail.com", "senha123"));
+		return transacao;
+	}
+	
+	@BeforeEach
+	public void criarCalculadora() {
+		calculadora = new CalculadoraDeImpostoService();
+	} // Para criar uma calculadora antes da execução de cada teste
+	
+	@Test
+	void transacaoDoTipoCompraNaoDeveriaTerImposto() {
+		Transacao transacao = criarTransacao(new BigDecimal("30.00"), 10, TipoTransacao.COMPRA);
 		
-		CalculadoraDeImpostoService calculadora = new CalculadoraDeImpostoService();
 		BigDecimal imposto = calculadora.calcular(transacao);
 		
 		assertEquals(BigDecimal.ZERO, imposto);
 	}
+
 	
 	@Test
 	void transacaoDoTipoVendaComValorMenorDoQueVinteMilNaoDeveriaTerImposto() {
-		Transacao transacao = new Transacao(
-				120l,
-				"BBSE3",
-				new BigDecimal("30.00"),
-				10,
-				LocalDate.now(),
-				TipoTransacao.VENDA,
-				new Usuario(1l, "Rafaela", "rafa@gmail.com", "senha123"));
+		Transacao transacao = criarTransacao(new BigDecimal("30.00"), 10, TipoTransacao.VENDA);
 		
-		CalculadoraDeImpostoService calculadora = new CalculadoraDeImpostoService();
 		BigDecimal imposto = calculadora.calcular(transacao);
 		
 		assertEquals(BigDecimal.ZERO, imposto);
@@ -49,16 +54,8 @@ class CalculadoraDeImpostoServiceTest {
 	
 	@Test
 	void deveriaCalcularImpostoDeTransacaoDoTipoVEndaComValorMaiorQueVinteMil() {
-		Transacao transacao = new Transacao(
-				120l,
-				"BBSE3",
-				new BigDecimal("1000.00"),
-				30,
-				LocalDate.now(),
-				TipoTransacao.VENDA,
-				new Usuario(1l, "Rafaela", "rafa@gmail.com", "senha123"));
+		Transacao transacao = criarTransacao(new BigDecimal("1000.00"), 30, TipoTransacao.VENDA);
 		
-		CalculadoraDeImpostoService calculadora = new CalculadoraDeImpostoService();
 		BigDecimal imposto = calculadora.calcular(transacao);
 		
 		assertEquals(new BigDecimal("4500.00"), imposto);

@@ -15,6 +15,7 @@ O projeto será atualizado e incrementado ao decorrer dos módulos do bootcamp, 
 - `Aplicação do padrão Repository`
 - `Tratamento de erros HTTP 400 e 500`
 - `Migrações no MySQL feitas com flyway`
+- `Documentação com Swagger (SpringFox)`
  
 
 ## ✔️ Técnicas e tecnologias utilizadas
@@ -40,6 +41,7 @@ O projeto será atualizado e incrementado ao decorrer dos módulos do bootcamp, 
 - ``Mockito``
 - ``AssertJ``
 - ``Testes automatizados``
+- ``Swagger``
 
 ## 📁 Acesso ao projeto
 Você pode acessar os arquivos do projeto clicando [aqui](https://github.com/gui-lirasilva/carteiraAPI/tree/master/src/main).

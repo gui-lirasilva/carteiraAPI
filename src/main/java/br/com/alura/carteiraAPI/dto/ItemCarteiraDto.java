@@ -19,6 +19,6 @@ public class ItemCarteiraDto {
 		this.percentual = new BigDecimal(quantidade)
 				.divide(new BigDecimal(quantidadeTotal), 4, RoundingMode.HALF_UP)
 				.multiply(new BigDecimal("100"))
-				.setScale(2);
+				.setScale(2, RoundingMode.HALF_UP);
 	}
 }

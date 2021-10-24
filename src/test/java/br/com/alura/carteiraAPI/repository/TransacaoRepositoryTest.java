@@ -155,10 +155,10 @@ class TransacaoRepositoryTest {
 		.hasSize(4)
 		.extracting(ItemCarteiraDto::getTicker, ItemCarteiraDto::getQuantidade, ItemCarteiraDto::getPercentual)
 		.containsExactlyInAnyOrder( 
-				Assertions.tuple("XPTO4", 10l, new BigDecimal("0.07")),
-				Assertions.tuple("XPTO5", 10l,new BigDecimal("0.07")),
-				Assertions.tuple("XPTO6", 100l, new BigDecimal("0.76")),
-				Assertions.tuple("XPTO8", 10l, new BigDecimal("0.07")));
+				Assertions.tuple("XPTO4", 10l, new BigDecimal("4.55")),
+				Assertions.tuple("XPTO5", 10l,new BigDecimal("4.55")),
+				Assertions.tuple("XPTO6", 100l, new BigDecimal("333.33")),
+				Assertions.tuple("XPTO8", 10l, new BigDecimal("4.55")));
 	}
 
 }

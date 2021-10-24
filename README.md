@@ -5,10 +5,16 @@ O projeto será atualizado e incrementado ao decorrer dos módulos do bootcamp, 
 
 ## 🔨 Funcionalidades do projeto
 
-- `cadastro de usuário`
-- `cadastro de transações`
-- `Validações para as entradas de informação de usuários e transações`
-- `As informações ainda não acessando o banco de dados`
+- `Cadastro de usuário`
+- `Cadastro de transações`
+- `Relatório de investimentos com percentuais`
+- `Validações com bean validation`
+- `Persistência de dados via JPA`
+- `Testes unitários com JUnit e Mockito`
+- `Camadas de Service, Model, Controller`
+- `Aplicação do padrão Repository`
+- `Tratamento de erros HTTP 400 e 500`
+- `Migrações no MySQL feitas com flyway`
  
 
 ## ✔️ Técnicas e tecnologias utilizadas
@@ -23,11 +29,17 @@ O projeto será atualizado e incrementado ao decorrer dos módulos do bootcamp, 
 - ``ModelMapper 2.4.2``
 - ``Lombok 1.18.20``
 - ``Flyway core 7.7.3``
+- ``Migrations``
 - ``MySQL 5.7``
+- ``H2 1.4.2``
 - ``Postman 9.0.2``
 - ``DTO (Data transfer object)``
+- ``Padrão Repository``
 - ``REST``
 - ``JUnit``
+- ``Mockito``
+- ``AssertJ``
+- ``Testes automatizados``
 
 ## 📁 Acesso ao projeto
 Você pode acessar os arquivos do projeto clicando [aqui](https://github.com/gui-lirasilva/carteiraAPI/tree/master/src/main).

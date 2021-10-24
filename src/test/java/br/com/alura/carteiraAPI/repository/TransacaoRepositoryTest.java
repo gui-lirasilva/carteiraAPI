@@ -94,7 +94,7 @@ class TransacaoRepositoryTest {
 				Assertions.tuple("XPTO4", 10l, 0.043478),
 				Assertions.tuple("XPTO5", 10l, 0.043478),
 				Assertions.tuple("XPTO6", 200l, 0.869565),
-				Assertions.tuple("XPTO8", 10l, 0.043478)); // Continua com erro
+				Assertions.tuple("XPTO8", 10l, 0.043478));
 	}
 
 }

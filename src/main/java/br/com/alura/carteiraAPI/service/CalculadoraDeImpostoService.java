@@ -16,13 +16,13 @@ public class CalculadoraDeImpostoService {
 		
 		BigDecimal valorTransacao = transacao
 									.getPreco()
-									.multiply(new BigDecimal(transacao.getQuantidade()).setScale(2, RoundingMode.HALF_UP));
+									.multiply(new BigDecimal(transacao.getQuantidade()));
 		if(valorTransacao.compareTo(new BigDecimal(20000)) < 0) {
 			return BigDecimal.ZERO;
 		}
 		
 		return valorTransacao
-				.multiply(new BigDecimal("0.15")
-				.setScale(2, RoundingMode.HALF_UP));
+				.multiply(new BigDecimal("0.15"))
+				.setScale(2, RoundingMode.HALF_UP);
 	}
 }

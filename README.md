@@ -6,14 +6,18 @@ O projeto será atualizado e incrementado ao decorrer dos módulos do bootcamp, 
 ## 🔨 Funcionalidades do projeto
 
 - `Cadastro de usuário`
-- `Cadastro de transações`
+- `Listagem de usuários`
+- `Cadastro de transação`
+- `Listagem de transações`
+- `Detalhar transação buscando por Id`
+- `Excluir transação por Id`
 - `Relatório de investimentos com percentuais`
 - `Validações com bean validation`
 - `Persistência de dados via JPA`
 - `Testes unitários com JUnit e Mockito`
 - `Camadas de Service, Model, Controller`
 - `Aplicação do padrão Repository`
-- `Tratamento de erros HTTP 400 e 500`
+- `Tratamento de erros HTTP 400, 404 e 500`
 - `Migrações no MySQL feitas com flyway`
 - `Documentação com Swagger (SpringFox)`
  
@@ -32,6 +36,7 @@ O projeto será atualizado e incrementado ao decorrer dos módulos do bootcamp, 
 - ``Flyway core 7.7.3``
 - ``Migrations``
 - ``MySQL 5.7``
+- ``CRUD``
 - ``H2 1.4.2``
 - ``Postman 9.0.2``
 - ``DTO (Data transfer object)``

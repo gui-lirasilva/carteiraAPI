@@ -18,6 +18,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 
+@SuppressWarnings("serial")
 @Getter
 @Setter
 @ToString(exclude = {"senha"})
@@ -25,7 +26,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @Entity
 @Table(name = "usuarios")
-public class Usuario implements UserDetails{
+public class Usuario implements UserDetails {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

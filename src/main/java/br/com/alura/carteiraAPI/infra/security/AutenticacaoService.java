@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import br.com.alura.carteiraAPI.repository.UsuarioRepository;
 
 @Service
-public class AutenticacaoService implements UserDetailsService{
+public class AutenticacaoService implements UserDetailsService {
 	
 	@Autowired
 	private UsuarioRepository repository;

@@ -18,7 +18,6 @@ class CalculadoraDeImpostoServiceTest {
 
 	private Transacao criarTransacao(BigDecimal preco, Integer quantidade, TipoTransacao tipo) {
 		Transacao transacao = new Transacao(
-				120l,
 				"BBSE3",
 				preco,
 				quantidade,

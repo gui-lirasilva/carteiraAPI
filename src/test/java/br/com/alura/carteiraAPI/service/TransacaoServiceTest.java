@@ -8,16 +8,20 @@ import java.time.LocalDate;
 
 import javax.persistence.EntityNotFoundException;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.modelmapper.ModelMapper;
 
 import br.com.alura.carteiraAPI.dto.TransacaoDto;
 import br.com.alura.carteiraAPI.dto.TransacaoFormDto;
 import br.com.alura.carteiraAPI.modelo.TipoTransacao;
+import br.com.alura.carteiraAPI.modelo.Transacao;
+import br.com.alura.carteiraAPI.modelo.Usuario;
 import br.com.alura.carteiraAPI.repository.TransacaoRepository;
 import br.com.alura.carteiraAPI.repository.UsuarioRepository;
 
@@ -30,8 +34,21 @@ class TransacaoServiceTest {
 	@Mock
 	private UsuarioRepository usuarioRepository;
 	
+	@Mock
+	private ModelMapper modelMapper;
+
+	@Mock
+	private CalculadoraDeImpostoService calculadoraDeImpostoService;
+	
 	@InjectMocks
 	private TransacaoService service;
+	
+	private Usuario logado;
+	
+	@BeforeEach
+	void beforeEach() {
+		this.logado = new Usuario("Rafaela", "rafa@gmail.com", "123456");
+	}
 	
 	private TransacaoFormDto criarTransacaoFormDto() {
 		TransacaoFormDto formDto = new TransacaoFormDto(
@@ -40,7 +57,7 @@ class TransacaoServiceTest {
 				LocalDate.now(),
 				120,
 				TipoTransacao.COMPRA,
-				1523l);
+				1l);
 		return formDto;
 	}
 	
@@ -48,7 +65,26 @@ class TransacaoServiceTest {
 	void deveriaCadastrarUmaTransacao() {
 		TransacaoFormDto formDto = criarTransacaoFormDto();
 		
-		TransacaoDto dto = service.cadastrar(formDto);
+		Transacao transacao = new Transacao(
+				formDto.getTicker(), 
+				formDto.getPreco(),
+				formDto.getQuantidade(),
+				formDto.getData(), 				 
+				formDto.getTipo(), 
+				logado);
+		
+
+		Mockito.when(usuarioRepository.getById(formDto.getUsuarioId())).thenReturn(logado);
+		Mockito.when(modelMapper.map(formDto, Transacao.class)).thenReturn(transacao);
+		Mockito.when(modelMapper.map(transacao, TransacaoDto.class)).thenReturn(new TransacaoDto(
+				null, 
+				formDto.getTicker(),
+				formDto.getPreco(), 
+				formDto.getQuantidade(), 
+				formDto.getTipo(), 
+				BigDecimal.ZERO));
+		
+		TransacaoDto dto = service.cadastrar(formDto, logado);
 		
 		Mockito.verify(transacaoRepository).save(Mockito.any());
 		
@@ -66,7 +102,7 @@ class TransacaoServiceTest {
 		.when(usuarioRepository.getById(formDto.getUsuarioId()))
 		.thenThrow(EntityNotFoundException.class);
 		
-		assertThrows(IllegalArgumentException.class, () -> service.cadastrar(formDto)); 
+		assertThrows(IllegalArgumentException.class, () -> service.cadastrar(formDto, logado)); 
 		// Para o JUnit entender que o teste será bem sucedido quando essa exception for lançada ao tentar cadastrar nesse caso
 		
 	}

@@ -3,9 +3,12 @@ package br.com.alura.carteiraAPI.service;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
+import org.springframework.stereotype.Service;
+
 import br.com.alura.carteiraAPI.modelo.TipoTransacao;
 import br.com.alura.carteiraAPI.modelo.Transacao;
 
+@Service
 public class CalculadoraDeImpostoService {
 	
 	// 15% de imposto para transações de venda com valor superior a R$ 20.000,00

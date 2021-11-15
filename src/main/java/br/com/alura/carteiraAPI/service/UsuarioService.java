@@ -13,8 +13,10 @@ import org.springframework.stereotype.Service;
 
 import br.com.alura.carteiraAPI.dto.UsuarioDto;
 import br.com.alura.carteiraAPI.dto.UsuarioFormDto;
+import br.com.alura.carteiraAPI.modelo.Perfil;
 import br.com.alura.carteiraAPI.modelo.Usuario;
 import br.com.alura.carteiraAPI.repository.UsuarioRepository;
+import br.com.alura.carteiraAPI.repository.PerfilRepository;
 
 @Service
 public class UsuarioService {
@@ -24,6 +26,9 @@ public class UsuarioService {
 	
 	@Autowired
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
+	
+	@Autowired
+	private PerfilRepository perfilRepository;
 	
 	@Autowired
 	private ModelMapper modelMapper;
@@ -36,6 +41,9 @@ public class UsuarioService {
 		Usuario usuario = modelMapper.map(dto, Usuario.class);
 		String senha = new Random().nextInt(999999)+"";
 		usuario.setSenha(bCryptPasswordEncoder.encode(senha));
+		
+		Perfil perfil = perfilRepository.getById(dto.getPerfilId());
+		usuario.adicionarPerfil(perfil);
 		
 		usuarioRepository.save(usuario);
 		return modelMapper.map(usuario, UsuarioDto.class);

@@ -9,6 +9,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -41,6 +42,7 @@ public class Transacao {
 	private TipoTransacao tipo;
 	
 	@ManyToOne
+	@JoinColumn(name = "usuario_id")
 	private Usuario usuario;
 
 	public Transacao(String ticker, BigDecimal preco, Integer quantidade, LocalDate data, TipoTransacao tipo,
